@@ -1,4 +1,4 @@
-DCSP---PDF-Maker-Pro
+PDF-Maker-Pro
 ====================
-
-PDF Maker Pro DCSP Project
+## Git Resources
+[try.github.io](http://try.github.io)
