@@ -2,7 +2,7 @@ PDF-Maker-Pro
 ====================
 ## Team Awesome
 + John Buffington
-+ Jordan Pindea
++ Jordan Pineda
 + Cris Cummins
 
 ## Git Resources
