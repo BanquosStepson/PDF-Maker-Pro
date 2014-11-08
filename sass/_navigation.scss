@@ -1,27 +1,30 @@
 .app-nav {
 	.navbar {
-		.nav.navbar-nav {
-			.back, .log-out, .account-settings {
-				a {
-					.glyphicon {
-						position: relative;
-						font-size: 1.125em;
-						&:before {
+		.navbar-header {
+			.navbar-brand {
+				img {
+					max-height: 30px;
+				}
+			}
+		}
+		.nav {
+			&.navbar-nav {
+				li {
+					a {
+						.glyphicon {
 							position: relative;
-							top: 2px;
+							font-size: 1.125em;
+							&:before {
+								position: relative;
+								top: 2px;
+							}
 						}
 					}
 				}
-			}
-			.log-out {
-				margin-right: 15px;
-				.glyphicon:before {
-					margin-left: 3px;
-				}
-			}
-			.account-settings {
-				.glyphicon:before {
-					margin-right: 3px;
+				& > li {
+					& > a {
+						padding: 2em 1.5em;
+					}
 				}
 			}
 		}
