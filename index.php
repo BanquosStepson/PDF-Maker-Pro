@@ -14,7 +14,6 @@
 </head>
 <body>
 
-    <?php include('templates/header.html'); ?>
     <?php include('templates/app-nav.html'); ?>
     <?php include('templates/main-app-container.html'); ?>
 

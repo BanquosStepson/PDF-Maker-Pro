@@ -1,3 +1,17 @@
+<section class="go-back-button-row container">
+	<div class="row">
+		<div class="col-xs-2">
+			<div>
+				<a href="#" class="btn btn-primary btn-sm">
+					<span class="glyphicon glyphicon-chevron-left"></span> Go Back
+				</a>
+			</div>
+		</div>
+		<div class="col-xs-10">
+			<h6><b>[filename].pdf</b></h6>
+		</div>
+	</div>
+</section>
 <section class="main-app-container container">
 	<div class="row">
 		<div class="col-xs-4">
@@ -5,69 +19,164 @@
 				<div class="panel-heading">
 					<h3 class="panel-title">PDF Elements</h3>
 				</div>
-				<div class="panel-body">
-					<div class="row">
+				<div class="panel-body pdf-elements-container">
+					<div class="row pdf-elements-row">
+						<div class="col-xs-6">
+							<div class="pdf-element-outer-wrap" data-element-name='bodytext'>
+								<div class="pdf-element-inner-wrap" draggable='true'>
+									<div class="pdf-element-img-wrap">
+										<img src="http://dummyimage.com/400x266/4CAF50/fefefe.gif&text=Paragraph+Text" alt="placeholder+image">
+									</div>
+									<div class="pdf-element-content-wrap">
+										<h6>Test</h6>
+									</div>
+									<!-- <div class="drag-overlay"></div> -->
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="pdf-element-outer-wrap" data-element-name='image'>
+								<div class="pdf-element-inner-wrap" draggable='true'>
+									<div class="pdf-element-img-wrap">
+										<img src="http://dummyimage.com/400x266/4CAF50/fefefe.gif&text=&nbsp;&nbsp;Image&nbsp;&nbsp;" alt="placeholder+image">
+									</div>
+									<div class="pdf-element-content-wrap">
+										<h6>Test</h6>
+									</div>
+									<!-- <div class="drag-overlay"></div> -->
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row pdf-elements-row">
+						<div class="col-xs-6">
+							<div class="pdf-element-outer-wrap" data-element-name='shape'>
+								<div class="pdf-element-inner-wrap" draggable='true'>
+									<div class="pdf-element-img-wrap">
+										<img src="http://dummyimage.com/400x266/4CAF50/fefefe.gif&text=&nbsp;&nbsp;Shape&nbsp;&nbsp;" alt="placeholder+image">
+									</div>
+									<div class="pdf-element-content-wrap">
+										<h6>Test</h6>
+									</div>
+									<!-- <div class="drag-overlay"></div> -->
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="pdf-element-outer-wrap" data-element-name='line'>
+								<div class="pdf-element-inner-wrap" draggable='true'>
+									<div class="pdf-element-img-wrap">
+
+									</div>
+									<div class="pdf-element-content-wrap">
+										<h6>Test</h6>
+									</div>
+									<!-- <div class="drag-overlay"></div> -->
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row pdf-elements-row">
+						<div class="col-xs-6">
+							<div class="pdf-element-outer-wrap" data-element-name='header'>
+								<div class="pdf-element-inner-wrap" draggable='true'>
+									<div class="pdf-element-img-wrap">
+										<img src="http://dummyimage.com/400x266/4CAF50/fefefe.gif&text=&nbsp;&nbsp;Header&nbsp;&nbsp;" alt="placeholder+image">
+									</div>
+									<div class="pdf-element-content-wrap">
+										<h6>Test</h6>
+									</div>
+									<!-- <div class="drag-overlay"></div> -->
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="pdf-element-outer-wrap" data-element-name='subheader'>
+								<div class="pdf-element-inner-wrap" draggable='true'>
+									<div class="pdf-element-img-wrap">
+										<img src="http://dummyimage.com/400x266/4CAF50/fefefe.gif&text=&nbsp;&nbsp;Header&nbsp;&nbsp;" alt="placeholder+image">
+									</div>
+									<div class="pdf-element-content-wrap">
+										<h6>Test</h6>
+									</div>
+									<!-- <div class="drag-overlay"></div> -->
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col-xs-8 app-toolbar">
-			<div class="btn-group">
-				<button type="button" class="btn btn-default btn-sm">
-					<span class="glyphicon glyphicon-backward"></span> Undo
-				</button>
-				<button type="button" class="btn btn-default btn-sm">
-					Redo <span class="glyphicon glyphicon-forward"></span>
-				</button>
+		<div class="col-xs-8">
+			<div class="row app-toolbar">
+				<div class="col-xs-12">
+					<div class="btn-group">
+						<button type="button" class="btn btn-default btn-sm">
+							<span class="glyphicon glyphicon-backward"></span> Undo
+						</button>
+						<button type="button" class="btn btn-default btn-sm">
+							Redo <span class="glyphicon glyphicon-forward"></span>
+						</button>
+					</div>
+					<div class="btn-group">
+						<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Delete Element">
+							<span class="glyphicon glyphicon-remove"></span>
+						</button>
+					</div>
+					<div class="btn-group">
+						<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Align Left">
+							<span class="glyphicon glyphicon-align-left"></span>
+						</button>
+						<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Align Center">
+							<span class="glyphicon glyphicon-align-center"></span>
+						</button>
+						<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Align Right">
+							<span class="glyphicon glyphicon-align-right"></span>
+						</button>
+						<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Justify Text">
+							<span class="glyphicon glyphicon-align-justify"></span>
+						</button>
+					</div>
+					<div class="btn-group">
+						<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Align Left">
+							<span class="glyphicon glyphicon-list"></span>
+						</button>
+						<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Align Center">
+							<span class="glyphicon glyphicon-align-center"></span>
+						</button>
+					</div>
+					<div class="btn-group">
+						<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Align Left">
+							<span class="glyphicon glyphicon-align-bold"></span>
+						</button>
+						<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Align Center">
+							<span class="glyphicon glyphicon-align-italic"></span>
+						</button>
+						<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Align Right">
+							<span class="glyphicon glyphicon-align-right"></span>
+						</button>
+						<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Justify Text">
+							<span class="glyphicon glyphicon-align-justify"></span>
+						</button>
+					</div>
+					<div class="btn-group">
+						<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Align Left">
+							<span class="glyphicon glyphicon-zoom-in"></span>
+						</button>
+						<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Align Center">
+							<span class="glyphicon glyphicon-zoom-out"></span>
+						</button>
+					</div>
+				</div>
 			</div>
-			<div class="btn-group">
-				<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Delete Element">
-					<span class="glyphicon glyphicon-remove"></span>
-				</button>
-			</div>
-			<div class="btn-group">
-				<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Align Left">
-					<span class="glyphicon glyphicon-align-left"></span>
-				</button>
-				<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Align Center">
-					<span class="glyphicon glyphicon-align-center"></span>
-				</button>
-				<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Align Right">
-					<span class="glyphicon glyphicon-align-right"></span>
-				</button>
-				<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Justify Text">
-					<span class="glyphicon glyphicon-align-justify"></span>
-				</button>
-			</div>
-			<div class="btn-group">
-				<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Align Left">
-					<span class="glyphicon glyphicon-list"></span>
-				</button>
-				<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Align Center">
-					<span class="glyphicon glyphicon-align-center"></span>
-				</button>
-			</div>
-			<div class="btn-group">
-				<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Align Left">
-					<span class="glyphicon glyphicon-align-bold"></span>
-				</button>
-				<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Align Center">
-					<span class="glyphicon glyphicon-align-italic"></span>
-				</button>
-				<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Align Right">
-					<span class="glyphicon glyphicon-align-right"></span>
-				</button>
-				<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Justify Text">
-					<span class="glyphicon glyphicon-align-justify"></span>
-				</button>
-			</div>
-			<div class="btn-group">
-				<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Align Left">
-					<span class="glyphicon glyphicon-zoom-in"></span>
-				</button>
-				<button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Align Center">
-					<span class="glyphicon glyphicon-zoom-out"></span>
-				</button>
+			<div class="row pdf-maker-canvas-wrap">
+				<div class="col-xs-12">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<canvas id="pdf-maker-canvas" class="pdf-maker-canvas"></canvas>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

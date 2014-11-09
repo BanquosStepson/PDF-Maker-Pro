@@ -1,9 +1,13 @@
 .app-nav {
 	.navbar {
+		padding: 0 15px;
+		margin-bottom: 1em;
 		.navbar-header {
 			.navbar-brand {
+				height: 100%;
+				padding: 1em 0;
 				img {
-					max-height: 30px;
+					max-height: 27px;
 				}
 			}
 		}

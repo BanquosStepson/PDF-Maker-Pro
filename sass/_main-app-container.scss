@@ -1,0 +1,68 @@
+.go-back-button-row {
+	margin-bottom: 1em;
+	.row {
+		margin: 0;
+		border-bottom: 1px solid #dddddd;
+	}
+}
+
+.main-app-container {
+	.pdf-elements-container {
+		.pdf-elements-row {
+			margin-top: 0.5em;
+			.pdf-element-outer-wrap {
+				margin-bottom: 0.5em;
+				padding-bottom: 1em;
+				border-bottom: 1px solid #dddddd;
+				.pdf-element-inner-wrap {
+					padding-bottom: 1em;
+					background: #e7e7e7;
+					position: relative;
+					z-index: 1;
+					.pdf-element-img-wrap {
+						height: 100px;
+						background: url(http://dummyimage.com/400x266/4CAF50/fefefe.gif&text=&nbsp;&nbsp;Line&nbsp;&nbsp;) no-repeat left top;
+						background-size: 400px;
+						img {
+							max-width: 100%;
+						    -webkit-user-select: none;
+						    user-select: none; /* Not valid CSS yet, as of July 2012 */
+						    -webkit-user-drag: none; /* Prevents dragging of images/divs etc */
+						    user-drag: none;
+						}
+					}
+					.pdf-element-content-wrap {
+						padding: 0 0.5em;
+						h6 {
+							margin-top: 7px;
+							font-weight: bold;
+						}
+					}
+					.drag-overlay {
+						position: absolute;
+						top:0;
+						bottom:0;
+						left:0;
+						right:0;
+						z-index: 2;
+					}
+				}
+			}
+			&:first-child {
+				margin-top: 0;
+			}
+		}
+	}
+	.app-toolbar {
+		margin-bottom: 1em;
+	}
+	.pdf-maker-canvas-wrap {
+		.panel-body {
+			padding: 0;
+			.pdf-maker-canvas {
+				width: 100%;
+			}
+		}
+		// height:
+	}
+}
