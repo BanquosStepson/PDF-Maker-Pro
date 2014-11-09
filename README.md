@@ -15,14 +15,14 @@ PDF-Maker-Pro
 
 ### Frontend
 #### Booststrap v3.3
-PDF Maker Pro uses a custom, themed Bootstrap 3 distribution from [http://bootswatch.com](http://bootswatch.com). The theme's name is [Paper](http://bootswatch.com/paper/). It is based on [Google](http://www.google.com/design/)'s new [design language](http://en.wikipedia.org/wiki/Design_language) called ["Material"](http://www.google.com/design/spec/material-design/introduction.html)
+PDF Maker Pro uses a custom, themed Bootstrap 3 distribution from [http://bootswatch.com](http://bootswatch.com). The theme's name is [Paper](http://bootswatch.com/paper/). It is based on [Google](http://www.google.com/design/)'s new [design language](http://en.wikipedia.org/wiki/Design_language) called "[Material](http://www.google.com/design/spec/material-design/introduction.html)".
 
 #### Semantic HTML5 & CSS3
 The frontend is built with best practices in mind and aims to hold semantic HTML and CSS.
 
 ##### CSS
 ###### SASS
-We are using SASS (Syntactically Awesome Stylesheets) to generate our CSS. Sass is a programmatic way to write CSS, and compiles in your project to the folder of your choosing. You can find out more about SASS here: (http://sass-lang.com)[http://sass-lang.com/].
+We are using SASS (Syntactically Awesome Stylesheets) to generate our CSS. Sass is a programmatic way to write CSS, and compiles in your project to the folder of your choosing. You can find out more about SASS here: [http://sass-lang.com](http://sass-lang.com/).
 
 #### JavaScript
 ###### Coffeescript
