@@ -12,9 +12,6 @@ class PdfDocument
         @pages = []
         @addPage new CanvasPage(@pg_dimensions)
         @addPage new CanvasPage(@pg_dimensions)
-        @addPage new CanvasPage(@pg_dimensions)
-        @addPage new CanvasPage(@pg_dimensions)
-        @addPage new CanvasPage(@pg_dimensions)
         @renderPages()
         @registerCanvasDragDropEvents()
 
@@ -91,9 +88,19 @@ class PdfDocument
             .droppable
                 activeClass: 'dragging'
                 hoverClass: 'dragging-hover'
+                tolerance: 'touch'
                 drop: (e, ui) ->
                     dropped_page_num = $(e.target).attr 'data-page-num'
                     elem_type = ui.draggable.parent().attr 'data-element-name'
                     if dropped_page_num != undefined
-                        that.pages[dropped_page_num - 1].addDraggedElement elem_type
+                        canvasCoords = $(e.target)[0].getBoundingClientRect()
+                        dropCoords =
+                            x: 0
+                            y: 0
+                        x = e.originalEvent.clientX
+                        y = e.originalEvent.clientY
+                        dropCoords.x = x - canvasCoords.left
+                        dropCoords.y = y - canvasCoords.top
+                        that.pages[dropped_page_num - 1].addDraggedElement elem_type, dropCoords
+                undefined
         undefined

@@ -18,9 +18,6 @@
       this.pages = [];
       this.addPage(new CanvasPage(this.pg_dimensions));
       this.addPage(new CanvasPage(this.pg_dimensions));
-      this.addPage(new CanvasPage(this.pg_dimensions));
-      this.addPage(new CanvasPage(this.pg_dimensions));
-      this.addPage(new CanvasPage(this.pg_dimensions));
       this.renderPages();
       this.registerCanvasDragDropEvents();
     }
@@ -99,15 +96,25 @@
       $('.pdf-maker-canvas-wrap .pdf-page .pdf-maker-canvas').droppable({
         activeClass: 'dragging',
         hoverClass: 'dragging-hover',
+        tolerance: 'touch',
         drop: function(e, ui) {
-          var dropped_page_num, elem_type;
+          var canvasCoords, dropCoords, dropped_page_num, elem_type, x, y;
           dropped_page_num = $(e.target).attr('data-page-num');
           elem_type = ui.draggable.parent().attr('data-element-name');
           if (dropped_page_num !== void 0) {
-            return that.pages[dropped_page_num - 1].addDraggedElement(elem_type);
+            canvasCoords = $(e.target)[0].getBoundingClientRect();
+            dropCoords = {
+              x: 0,
+              y: 0
+            };
+            x = e.originalEvent.clientX;
+            y = e.originalEvent.clientY;
+            dropCoords.x = x - canvasCoords.left;
+            dropCoords.y = y - canvasCoords.top;
+            return that.pages[dropped_page_num - 1].addDraggedElement(elem_type, dropCoords);
           }
         }
-      });
+      }, void 0);
       return void 0;
     };
 
@@ -124,7 +131,6 @@
 
     CanvasPage.prototype.setCanvasElement = function(elem) {
       var parent, parent_h, parent_w;
-      console.log($(elem));
       parent = $(elem).parent();
       parent_w = parent.width();
       parent_h = parent.height();
@@ -135,31 +141,31 @@
       return void 0;
     };
 
-    CanvasPage.prototype.addDraggedElement = function(elem) {
+    CanvasPage.prototype.addDraggedElement = function(elem, coords) {
       switch (elem) {
         case 'bodytext':
-          console.log('bodytext');
-          this.addTextElement();
+          console.log('added bodytext :: ' + coords.x + ', ' + coords.y);
+          this.addTextElement(coords);
           break;
         case 'image':
-          console.log('image');
-          this.addImageElement();
+          console.log('added image :: ' + coords.x + ', ' + coords.y);
+          this.addImageElement(coords);
           break;
         case 'shape':
-          console.log('shape');
-          this.addShapeElement();
+          console.log('added shape :: ' + coords.x + ', ' + coords.y);
+          this.addShapeElement(coords);
           break;
         case 'line':
-          console.log('line');
-          this.addLineElement();
+          console.log('added line :: ' + coords.x + ', ' + coords.y);
+          this.addLineElement(coords);
           break;
         case 'heading':
-          console.log('heading');
-          this.addHeadingElement();
+          console.log('added heading :: ' + coords.x + ', ' + coords.y);
+          this.addHeadingElement(coords);
           break;
         case 'subheading':
-          console.log('subheading');
-          this.addSubheadingElement();
+          console.log('added subheading :: ' + coords.x + ', ' + coords.y);
+          this.addSubheadingElement(coords);
       }
       return void 0;
     };
@@ -169,35 +175,50 @@
       return void 0;
     };
 
-    CanvasPage.prototype.addTextElement = function() {
+    CanvasPage.prototype.addTextElement = function(coords) {
       var newTextElement;
-      newTextElement = new fabric.IText('bob');
+      newTextElement = new fabric.IText('bob', {
+        left: coords.x,
+        top: coords.y,
+        originX: 'center',
+        originY: 'center'
+      });
       this.canv.add(newTextElement);
       return void 0;
     };
 
-    CanvasPage.prototype.addImageElement = function() {
-      var newImageElement, url;
+    CanvasPage.prototype.addImageElement = function(coords) {
+      var newImageElement, opts, url;
       url = 'https://www.google.com/images/srpr/logo11w.png';
+      opts = {
+        left: coords.x,
+        top: coords.y,
+        originX: 'center',
+        originY: 'center'
+      };
       newImageElement = new fabric.Image.fromURL(url, (function(_this) {
         return function(oImg) {
           return _this.canv.add(oImg);
         };
-      })(this));
+      })(this), opts);
       return void 0;
     };
 
-    CanvasPage.prototype.addShapeElement = function() {
+    CanvasPage.prototype.addShapeElement = function(coords) {
       var newShapeElement;
       newShapeElement = new fabric.Circle({
+        left: coords.x,
+        top: coords.y,
         radius: 100,
-        fill: '#d88'
+        fill: '#f33',
+        originX: 'center',
+        originY: 'center'
       });
       this.canv.add(newShapeElement);
       return void 0;
     };
 
-    CanvasPage.prototype.addLineElement = function() {
+    CanvasPage.prototype.addLineElement = function(coords) {
       var newLineElement;
       newLineElement = new fabric.Text({
         p: v
@@ -205,7 +226,7 @@
       return void 0;
     };
 
-    CanvasPage.prototype.addHeadingElement = function() {
+    CanvasPage.prototype.addHeadingElement = function(coords) {
       var newHeadingElement;
       newHeadingElement = new fabric.Text({
         p: v
@@ -213,7 +234,7 @@
       return void 0;
     };
 
-    CanvasPage.prototype.addSubheadingElement = function() {
+    CanvasPage.prototype.addSubheadingElement = function(coords) {
       var newSubheadingElement;
       newSubheadingElement = new fabric.Text({
         p: v
@@ -223,7 +244,12 @@
 
     CanvasPage.prototype.setPageBackground = function() {
       var pageRect;
-      pageRect = new fabric.Rect();
+      pageRect = new fabric.Rect({
+        backgroundColor: 'yellow',
+        fill: 'pink',
+        borderColor: 'blue'
+      });
+      this.canv.add(pageRect);
       return void 0;
     };
 
