@@ -86,7 +86,15 @@
       that = this;
       $('.main-app-container .pdf-elements-container .pdf-element-inner-wrap').draggable({
         revert: true,
-        zIndex: 99
+        zIndex: 99,
+        drag: function(e) {
+          if ($(e.originalEvent.target).hasClass('pdf-maker-canvas')) {
+            return $(e.target).css('opacity', 0.3);
+          }
+        },
+        stop: function(e) {
+          return $(e.target).css('opacity', 1);
+        }
       });
       $('.pdf-maker-canvas-wrap .pdf-page .pdf-maker-canvas').droppable({
         activeClass: 'dragging',
@@ -215,7 +223,7 @@
 
     CanvasPage.prototype.setPageBackground = function() {
       var pageRect;
-      pageRect = new fabric.Rect(ef);
+      pageRect = new fabric.Rect();
       return void 0;
     };
 

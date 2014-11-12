@@ -82,6 +82,11 @@ class PdfDocument
             .draggable
                 revert: true
                 zIndex: 99
+                drag: (e) ->
+                    if $(e.originalEvent.target).hasClass 'pdf-maker-canvas'
+                        $(e.target).css 'opacity', 0.3
+                stop: (e) ->
+                    $(e.target).css 'opacity', 1
         $('.pdf-maker-canvas-wrap .pdf-page .pdf-maker-canvas')
             .droppable
                 activeClass: 'dragging'

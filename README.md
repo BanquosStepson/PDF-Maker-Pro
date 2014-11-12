@@ -28,7 +28,7 @@ We are using SASS (Syntactically Awesome Stylesheets) to generate our CSS. Sass 
 ###### Coffeescript
 Our frontend interface is heavily reliant on JavaScript. Coffeescript does a good job of keeping things simple, compared to the somewhat verbose nature of JavaScript.
 ###### Fabric.js Canvas Library
-We are using the Fabric.js library to handle the creation and management of PDF elements on each page of a PDF Maker Pro PDF document. It allows us to export the elements on the canvas to a JSON representation, as well as import from JSON. This is the key component to storing a HTML5 canvas representation of a PDF document in the database for later use.   
+We are using the Fabric.js library to handle the creation and management of PDF elements on each page of a PDF Maker Pro PDF document. It allows us to export the elements on the canvas to a JSON representation, as well as import from JSON. This is the key component to storing a HTML5 canvas representation of a PDF document in the database for later use. It also has very robust methods for dealing with text.   
 ###### Grunt - JavaScript Task Runner
 It's possible Grunt may help improve fronend workflow. It might be used at a later time.
 
