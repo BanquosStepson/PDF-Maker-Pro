@@ -213,6 +213,12 @@
       return void 0;
     };
 
+    CanvasPage.prototype.setPageBackground = function() {
+      var pageRect;
+      pageRect = new fabric.Rect(ef);
+      return void 0;
+    };
+
     return CanvasPage;
 
   })();

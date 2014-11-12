@@ -69,6 +69,6 @@ class CanvasPage
         undefined
     setPageBackground: ->
         pageRect = new fabric.Rect(
-
+                ef
             )
         undefined
