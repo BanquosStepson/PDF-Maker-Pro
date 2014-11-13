@@ -34,7 +34,7 @@ It's possible Grunt may help improve fronend workflow. It might be used at a lat
 
 ## Workflow Tools
 ### Git & GitHub
-We are using (Git)[http://git-scm.com/] for source control management, and (GitHub)[https://github.com/] for collaboration and project management (issue tracker always comes in handy and acts as a great to-do list).
+We are using [Git](http://git-scm.com/) for source control management, and [GitHub](https://github.com/) for collaboration and project management (issue tracker always comes in handy and acts as a great to-do list).
 #### Git Resources
 [try.github.io](http://try.github.io)
 
