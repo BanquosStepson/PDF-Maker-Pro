@@ -14,6 +14,7 @@ class PdfDocument
         @addPage new CanvasPage(@pg_dimensions)
         @renderPages()
         @registerCanvasDragDropEvents()
+        @registerExternalInteractionEvents()
 
     updateTitle: (title) ->
         undefined
@@ -103,4 +104,23 @@ class PdfDocument
                         dropCoords.y = y - canvasCoords.top
                         that.pages[dropped_page_num - 1].addDraggedElement elem_type, dropCoords
                 undefined
+        undefined
+
+    # registers objects outside the canvas for interacting with objects on the
+    # canvas, specifically for editing properties of the document or elements
+    # within the document
+    registerExternalInteractionEvents: ->
+        that = @
+        $('.pdfdoc-property-editor .pdfdoc-properties #show-margin-lines').on 'change', ->
+            if $(@).prop 'checked'
+                console.log 'checked'
+                for page in that.pages
+                    page.setMarginLines()
+            else
+                console.log 'unchecked'
+                for page in that.pages
+                    page.removeMarginLines()
+                # for page in @pages
+
+
         undefined

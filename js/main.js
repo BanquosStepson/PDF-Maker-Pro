@@ -20,6 +20,7 @@
       this.addPage(new CanvasPage(this.pg_dimensions));
       this.renderPages();
       this.registerCanvasDragDropEvents();
+      this.registerExternalInteractionEvents();
     }
 
     PdfDocument.prototype.updateTitle = function(title) {
@@ -118,6 +119,34 @@
       return void 0;
     };
 
+    PdfDocument.prototype.registerExternalInteractionEvents = function() {
+      var that;
+      that = this;
+      $('.pdfdoc-property-editor .pdfdoc-properties #show-margin-lines').on('change', function() {
+        var page, _i, _j, _len, _len1, _ref, _ref1, _results, _results1;
+        if ($(this).prop('checked')) {
+          console.log('checked');
+          _ref = that.pages;
+          _results = [];
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            page = _ref[_i];
+            _results.push(page.setMarginLines());
+          }
+          return _results;
+        } else {
+          console.log('unchecked');
+          _ref1 = that.pages;
+          _results1 = [];
+          for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+            page = _ref1[_j];
+            _results1.push(page.removeMarginLines());
+          }
+          return _results1;
+        }
+      });
+      return void 0;
+    };
+
     return PdfDocument;
 
   })();
@@ -132,12 +161,17 @@
     CanvasPage.prototype.setCanvasElement = function(elem) {
       var parent, parent_h, parent_w;
       parent = $(elem).parent();
-      parent_w = parent.width();
-      parent_h = parent.height();
+      this.canv_w = parent_w = parent.width();
+      this.canv_h = parent_h = parent.height();
+      this.pg_vertical_padding = 20;
+      this.pg_horizontal_padding = (this.canv_w - this.pg_dimensions.x) / 2;
       this.canv = new fabric.Canvas(elem);
       this.canv.setWidth(parent_w);
       this.canv.setHeight(parent_h);
+      console.log(parent_h);
+      this.canv.renderAll();
       this.setPageBackground();
+      this.registerInternalInteractionEvents();
       return void 0;
     };
 
@@ -176,14 +210,18 @@
     };
 
     CanvasPage.prototype.addTextElement = function(coords) {
-      var newTextElement;
-      newTextElement = new fabric.IText('bob', {
+      var newTextElement, sampleText;
+      sampleText = 'Double click text to edit';
+      newTextElement = new fabric.IText(sampleText, {
         left: coords.x,
         top: coords.y,
         originX: 'center',
-        originY: 'center'
+        originY: 'center',
+        fontSize: 16,
+        hasControls: false
       });
       this.canv.add(newTextElement);
+      this.fixElementPosition(newTextElement);
       return void 0;
     };
 
@@ -198,7 +236,8 @@
       };
       newImageElement = new fabric.Image.fromURL(url, (function(_this) {
         return function(oImg) {
-          return _this.canv.add(oImg);
+          _this.canv.add(oImg);
+          return _this.fixElementPosition(oImg);
         };
       })(this), opts);
       return void 0;
@@ -215,42 +254,190 @@
         originY: 'center'
       });
       this.canv.add(newShapeElement);
+      this.fixElementPosition(newShapeElement);
       return void 0;
     };
 
     CanvasPage.prototype.addLineElement = function(coords) {
       var newLineElement;
-      newLineElement = new fabric.Text({
-        p: v
+      coords = [coords.x, coords.y, coords.x + 100, coords.y];
+      newLineElement = new fabric.Line(coords, {
+        stroke: '#000000',
+        strokeWidth: 3,
+        lockScalingY: true,
+        hasControls: false,
+        borderColor: '#ff9800',
+        originX: 'center',
+        originY: 'center',
+        padding: 2
       });
+      this.canv.add(newLineElement);
+      this.fixElementPosition(newLineElement);
       return void 0;
     };
 
     CanvasPage.prototype.addHeadingElement = function(coords) {
-      var newHeadingElement;
-      newHeadingElement = new fabric.Text({
-        p: v
+      var newHeadingElement, sampleText;
+      sampleText = 'Heading (doubleclick to edit)';
+      newHeadingElement = new fabric.IText(sampleText, {
+        left: coords.x,
+        top: coords.y,
+        originX: 'center',
+        originY: 'center',
+        fontSize: 36,
+        hasControls: false
       });
+      this.canv.add(newHeadingElement);
+      this.fixElementPosition(newHeadingElement);
       return void 0;
     };
 
     CanvasPage.prototype.addSubheadingElement = function(coords) {
-      var newSubheadingElement;
-      newSubheadingElement = new fabric.Text({
-        p: v
+      var newSubheadingElement, sampleText;
+      sampleText = 'Subheading (doubleclick to edit)';
+      newSubheadingElement = new fabric.IText(sampleText, {
+        left: coords.x,
+        top: coords.y,
+        originX: 'center',
+        originY: 'center',
+        fontSize: 20,
+        hasControls: false
       });
+      this.canv.add(newSubheadingElement);
+      this.fixElementPosition(newSubheadingElement);
+      return void 0;
+    };
+
+    CanvasPage.prototype.fixElementPosition = function(elem) {
+      var bottomPos, leftPos, rightPos, topPos;
+      leftPos = elem.left - elem.width / 2;
+      rightPos = leftPos + elem.width;
+      topPos = elem.top - elem.height / 2;
+      bottomPos = topPos + elem.height;
+      if (leftPos < this.pg_horizontal_padding) {
+        elem.left = this.pg_horizontal_padding + elem.width / 2;
+      }
+      if (topPos < this.pg_vertical_padding) {
+        elem.top = this.pg_vertical_padding + elem.height / 2;
+      }
+      if (rightPos > this.pg_horizontal_padding + this.pg_dimensions.x) {
+        elem.left = this.canv_w - this.pg_horizontal_padding - elem.width / 2;
+      }
+      if (bottomPos > this.pg_vertical_padding + this.pg_dimensions.y) {
+        elem.top = this.canv_w - this.pg_vertical_padding - elem.height / 2;
+      }
+      elem.setCoords();
+      this.canv.renderAll();
+      return void 0;
+    };
+
+    CanvasPage.prototype.registerInternalInteractionEvents = function() {
+      this.canv.on('object:moving', (function(_this) {
+        return function(e) {
+          var bottomBound, height, left, rightBound, target, top, width;
+          target = e.target;
+          width = target.currentWidth;
+          height = target.currentHeight;
+          top = target.top - height / 2;
+          left = target.left - width / 2;
+          rightBound = _this.pg_dimensions.x + _this.pg_horizontal_padding;
+          bottomBound = _this.pg_dimensions.y + _this.pg_vertical_padding;
+          if (top + height / 2 < _this.pg_vertical_padding) {
+            top = _this.pg_vertical_padding;
+            target.setTop(top);
+          }
+          if (left + width / 2 < _this.pg_horizontal_padding) {
+            left = _this.pg_horizontal_padding;
+            target.setLeft(left);
+          }
+          if (left + width / 2 > rightBound) {
+            left = rightBound;
+            target.setLeft(left);
+          }
+          if (top + height / 2 > bottomBound) {
+            top = bottomBound;
+            return target.setTop(top);
+          }
+        };
+      })(this));
+      this.canv.on('object:selected', (function(_this) {
+        return function(e) {
+          switch (e.target.type) {
+            case 'i-text':
+              return void 0;
+            case 'image':
+              return void 0;
+            case 'circle':
+              return void 0;
+            case 'line':
+              return void 0;
+            case 'heading':
+              return void 0;
+            case 'subheading':
+              return void 0;
+          }
+        };
+      })(this));
       return void 0;
     };
 
     CanvasPage.prototype.setPageBackground = function() {
-      var pageRect;
+      var pageRect, page_center_x;
+      page_center_x = (this.canv_w - this.pg_dimensions.x) / 2;
       pageRect = new fabric.Rect({
-        backgroundColor: 'yellow',
-        fill: 'pink',
-        borderColor: 'blue'
+        width: this.pg_dimensions.x,
+        height: this.pg_dimensions.y,
+        left: page_center_x,
+        top: this.pg_vertical_padding,
+        fill: '#ffffff',
+        borderColor: 'blue',
+        selectable: false
       });
+      pageRect.setShadow("0 4px 10px rgba(0, 0, 0, 0.33)");
+      pageRect.hasControls = false;
       this.canv.add(pageRect);
       return void 0;
+    };
+
+    CanvasPage.prototype.setMarginLines = function() {
+      var coords, line_opts, margin_amount;
+      console.log('setting margin lines');
+      margin_amount = 50;
+      line_opts = {
+        stroke: 'rgba(36, 166, 227, 0.33)',
+        strokeWidth: 1,
+        lockScalingY: true,
+        hasControls: false,
+        originX: 'center',
+        originY: 'center',
+        padding: 2,
+        selectable: false
+      };
+      coords = [0, this.pg_vertical_padding + margin_amount, this.canv_w, this.pg_vertical_padding + margin_amount];
+      this.margin_top = new fabric.Line(coords, line_opts);
+      coords = [this.pg_horizontal_padding + margin_amount, 0, this.pg_horizontal_padding + margin_amount, this.canv_h];
+      this.margin_left = new fabric.Line(coords, line_opts);
+      coords = [0, this.canv_h - this.pg_vertical_padding - margin_amount, this.canv_w, this.canv_h - this.pg_vertical_padding - margin_amount];
+      this.margin_bottom = new fabric.Line(coords, line_opts);
+      coords = [this.canv_w - this.pg_horizontal_padding - margin_amount, 0, this.canv_w - this.pg_horizontal_padding - margin_amount, this.canv_h];
+      this.margin_right = new fabric.Line(coords, line_opts);
+      this.canv.add(this.margin_top);
+      this.canv.add(this.margin_left);
+      this.canv.add(this.margin_bottom);
+      this.canv.add(this.margin_right);
+      return void 0;
+    };
+
+    CanvasPage.prototype.removeMarginLines = function() {
+      this.canv.remove(this.margin_top);
+      this.canv.remove(this.margin_left);
+      this.canv.remove(this.margin_bottom);
+      this.canv.remove(this.margin_right);
+      return void 0;
+    };
+
+    CanvasPage.prototype.getSelectedElement = function() {
+      return this.canv.getActiveObject();
     };
 
     return CanvasPage;
@@ -262,7 +449,7 @@
     $('.main-app-container .app-toolbar button').tooltip();
     main = function() {
       var pdf_doc;
-      pdf_doc = new PdfDocument();
+      window.pdf = pdf_doc = new PdfDocument();
       return void 0;
     };
     main();
